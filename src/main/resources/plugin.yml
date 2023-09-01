@@ -1,0 +1,13 @@
+name: TestPlugin
+version: '${project.version}'
+main: testplugin.testplugin.TestPlugin
+api-version: '1.19'
+commands:
+  hotbarenable:
+    description: Enables hotbarlock
+    usage: /hotbarenable
+    aliases: [hbe, hotbare]
+  hotbardisable:
+    description: Disable hotbarlock
+    usage: /hotbardisable
+    aliases: [hbd, hotbard]

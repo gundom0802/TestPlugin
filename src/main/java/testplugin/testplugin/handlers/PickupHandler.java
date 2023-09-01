@@ -1,0 +1,38 @@
+package testplugin.testplugin.handlers;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
+import testplugin.testplugin.TestPlugin;
+
+public class PickupHandler implements Listener {
+    public PickupHandler(TestPlugin plugin) {
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
+
+    @EventHandler
+    public void onPickup(EntityPickupItemEvent event) {
+        LivingEntity pl = event.getEntity();
+        if (checkInventory(pl)) {
+            event.setCancelled(true);
+        }
+    }
+
+    public boolean checkInventory(LivingEntity pl) {
+        for (int i = 0; i < 35; i++) {
+            if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7) {
+                continue;
+            }
+            else {
+                if (((Player) pl).getInventory().getItem(i).getType() == Material.AIR) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
