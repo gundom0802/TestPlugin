@@ -1,7 +1,5 @@
 package testplugin.testplugin.util;
 
-import testplugin.testplugin.TestPlugin;
-
 import java.util.HashSet;
 import java.util.Set;
 
