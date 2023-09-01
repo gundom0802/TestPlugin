@@ -8,9 +8,6 @@ import testplugin.testplugin.handlers.HotbarHandler;
 import testplugin.testplugin.handlers.PickupHandler;
 import testplugin.testplugin.util.HotbarSetUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public final class TestPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
