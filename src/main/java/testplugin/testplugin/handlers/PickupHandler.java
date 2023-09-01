@@ -17,12 +17,12 @@ public class PickupHandler implements Listener {
     @EventHandler
     public void onPickup(EntityPickupItemEvent event) {
         LivingEntity pl = event.getEntity();
-        if (checkInventory(pl)) {
+        if (checkInventory(pl, event)) {
             event.setCancelled(true);
         }
     }
 
-    public boolean checkInventory(LivingEntity pl) {
+    public boolean checkInventory(LivingEntity pl, EntityPickupItemEvent event) {
         for (int i = 0; i < 35; i++) {
             if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7) {
                 continue;
@@ -30,6 +30,13 @@ public class PickupHandler implements Listener {
             else {
                 if (((Player) pl).getInventory().getItem(i).getType() == Material.AIR) {
                     return false;
+                }
+                else {
+                    if (event.getItem().getItemStack().getType() == ((Player) pl).getInventory().getItem(i).getType()) {
+                        if (((Player) pl).getInventory().getItem(i).getMaxStackSize() > 1 && ((Player) pl).getInventory().getItem(i).getAmount() < 64) {
+                            return false;
+                        }
+                    }
                 }
             }
         }
