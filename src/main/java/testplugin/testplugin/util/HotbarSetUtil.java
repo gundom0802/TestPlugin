@@ -7,21 +7,16 @@ public class HotbarSetUtil {
 
     public static Set<String> set = new HashSet<String>();
 
-    public Boolean getSet(String s) {
+    public static Boolean getSet(String s) {
 
-        if (set.contains(s)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return set.contains(s);
     }
 
-    public void setSet(String s) {
+    public static void setSet(String s) {
         set.add(s);
     }
 
-    public void removeSet(String s) {
+    public static void removeSet(String s) {
         set.remove(s);
     }
 }

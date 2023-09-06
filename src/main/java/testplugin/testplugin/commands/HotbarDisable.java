@@ -16,13 +16,12 @@ public class HotbarDisable implements CommandExecutor {
         }
 
         Player pl = (Player) sender;
-        HotbarSetUtil hbe = new HotbarSetUtil();
 
-        if (!(hbe.getSet(pl.getUniqueId().toString()))) {
+        if (!(HotbarSetUtil.getSet(pl.getUniqueId().toString()))) {
             pl.sendMessage("You already have hotbarlock disabled");
         }
         else {
-            hbe.removeSet(pl.getUniqueId().toString());
+            HotbarSetUtil.removeSet(pl.getUniqueId().toString());
             pl.sendMessage("Hotbarlock disabled");
         }
         return true;

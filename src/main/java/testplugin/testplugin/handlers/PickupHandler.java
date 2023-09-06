@@ -1,45 +1,36 @@
 package testplugin.testplugin.handlers;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
-import testplugin.testplugin.TestPlugin;
+import org.bukkit.inventory.ItemStack;
+import testplugin.testplugin.util.HotbarSetUtil;
 
 public class PickupHandler implements Listener {
-    public PickupHandler(TestPlugin plugin) {
-        Bukkit.getPluginManager().registerEvents(this, plugin);
-    }
 
     @EventHandler
     public void onPickup(EntityPickupItemEvent event) {
-        LivingEntity pl = event.getEntity();
-        if (checkInventory(pl, event)) {
-            event.setCancelled(true);
+        LivingEntity entity = event.getEntity();
+        if (!(entity instanceof Player)) {
+            return;
         }
-    }
-
-    public boolean checkInventory(LivingEntity pl, EntityPickupItemEvent event) {
-        for (int i = 0; i < 35; i++) {
-            if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7) {
-                continue;
-            }
-            else {
-                if (((Player) pl).getInventory().getItem(i).getType() == Material.AIR) {
-                    return false;
+        Player pl = (Player)entity;
+        ItemStack item = pl.getInventory().getItem(0);
+        if (HotbarSetUtil.getSet(pl.getUniqueId().toString())) {
+            for (int i = 9; i < 36; i++) {
+                item = pl.getInventory().getItem(i);
+                if (item == null) {
+                    event.getItem().remove();
+                    pl.getInventory().setItem(i,event.getItem().getItemStack());
+                    event.setCancelled(true);
+                    return;
                 }
-                else {
-                    if (event.getItem().getItemStack().getType() == ((Player) pl).getInventory().getItem(i).getType()) {
-                        if (((Player) pl).getInventory().getItem(i).getMaxStackSize() > 1 && ((Player) pl).getInventory().getItem(i).getAmount() < 64) {
-                            return false;
-                        }
-                    }
+                if (item.getMaxStackSize() > 1 && item.getAmount() < 64) {
+                    return;
                 }
             }
         }
-        return true;
+        event.setCancelled(true);
     }
 }
