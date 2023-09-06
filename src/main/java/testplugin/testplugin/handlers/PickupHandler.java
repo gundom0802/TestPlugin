@@ -1,4 +1,5 @@
 package testplugin.testplugin.handlers;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +17,7 @@ public class PickupHandler implements Listener {
             return;
         }
         Player pl = (Player)entity;
-        ItemStack item = pl.getInventory().getItem(0);
+        ItemStack item;
         if (HotbarSetUtil.getSet(pl.getUniqueId().toString())) {
             for (int i = 9; i < 36; i++) {
                 item = pl.getInventory().getItem(i);
@@ -24,13 +25,14 @@ public class PickupHandler implements Listener {
                     event.getItem().remove();
                     pl.getInventory().setItem(i,event.getItem().getItemStack());
                     event.setCancelled(true);
+                    pl.playSound(pl.getLocation(), Sound.ENTITY_ITEM_PICKUP, 10, 29);
                     return;
                 }
                 if (item.getMaxStackSize() > 1 && item.getAmount() < 64) {
                     return;
                 }
             }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 }

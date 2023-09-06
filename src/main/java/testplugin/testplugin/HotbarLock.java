@@ -8,7 +8,7 @@ import testplugin.testplugin.commands.HotbarDisable;
 import testplugin.testplugin.handlers.HotbarHandler;
 import testplugin.testplugin.handlers.PickupHandler;
 
-public final class TestPlugin extends JavaPlugin {
+public final class HotbarLock extends JavaPlugin {
     @Override
     public void onEnable() {
 

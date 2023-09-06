@@ -1,6 +1,6 @@
 name: TestPlugin
 version: '${project.version}'
-main: testplugin.testplugin.TestPlugin
+main: testplugin.testplugin.HotbarLock
 api-version: '1.19'
 commands:
   hotbarenable:
