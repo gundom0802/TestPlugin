@@ -5,7 +5,7 @@ api-version: '1.19'
 commands:
   hotbarenable:
     description: Enables hotbarlock
-    usage: /hotbarenable
+    usage: /hotbarenable <player>
     aliases: [hbe, hotbare]
   hotbardisable:
     description: Disable hotbarlock
